@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="row">
+        <div class="col">
+                <!-- ======= Hero Section ======= -->
+                <section id="hero" class="d-flex flex-column justify-content-center align-items-center text-bg-light">
+                    <div class="container text-center text-md-left" data-aos="fade-up">
+                        <div style="padding: 50px;">
+                            <h1 class="text-danger fw-bolder">Welcome to <span>HotelViewNG</span></h1>
+                            <h2 class="text-success fw-light">Discover Your Perfect Stay: Explore, Book, and Navigate the World! </h2>
+                            <form class="d-flex mt-4" role="search" method="POST" action="{% url 'home' %}">
+                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-success" type="submit">Search</button>
+                            </form>
+                        </div>
+                    </div>
+                </section><!-- End Hero -->
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="text-bg-secondary" style="height: 600px; overflow-y: hidden;">
+                    {{m|safe}}
+                </div>
+                </div>
+                <h1>{{title|title}}</h1>
+                <h2>{{content_text|title}}</h2>
+            </div>
+        </div>
+    </div>
+{% endblock %}

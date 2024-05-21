@@ -1,0 +1,108 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HotelViewNG</title>
+    <link href="{% static 'boot/css/bootstrap.min.css' %}" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-dark navbar-dark bg-dark mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bolder" href="{% url 'home' %}">HotelViewNG</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown mt-3 me-2 px-8 py-2 bg-danger rounded-4">
+                    <a class="nav-link dropdown-toggle text-light fw-bold" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Admin Configuration
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="nav-item">
+                            <a class="dropdown-item" href="#">Default Settings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="dropdown-item" href="#">Create Licence</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="dropdown-item" href="#">Set Pricing</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="dropdown-item {% if 'register_room_type' in request.path %} active text-light {% endif %}" href="{% url 'register-room-type' %}">Register Room Type</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="dropdown-item {% if 'register_hotel' in request.path %} active text-light {% endif %}" href="{% url 'register-hotel' %}">Register Hotel</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="dropdown-item" href="#">Register Owner</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown mt-3 me-2 px-8 py-2 bg-primary rounded-4">
+                    <a class="nav-link dropdown-toggle text-light fw-bold" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Owner Configuration
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="nav-item">
+                        <a class="dropdown-item" href="#">Activate Licence</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="dropdown-item" href="#">Register Staff</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="dropdown-item {% if '/account/register_room' == request.path %} active text-light {% endif %}" href="{% url 'register-room' %}">Register Room</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="dropdown-item {% if 'upload_room_pics' in request.path %} active text-light {% endif %}" href="{% url 'upload-room-pics' %}">Upload Room Pics</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="dropdown-item" href="#">Finance Report</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="dropdown-item" href="#">View Logs</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown mt-3 me-2 px-8 py-2 bg-success rounded-4">
+                    <a class="nav-link dropdown-toggle text-light fw-bold" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Staff Configuration
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="nav-item">
+                        <a class="dropdown-item" href="#">Manage Rooms</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="dropdown-item" href="#">Register Guest</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="dropdown-item" href="#">Make a Booking</a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+            <form class="d-flex" role="search" method="POST" action="{% url 'home' %}">
+                {% csrf_token %}
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-success" type="submit">Search</button>
+            </form>
+            </div>
+        </div>
+    </nav>
+    <main>
+        <div class="container-fluid">
+            {% block content %}
+            {% endblock %}
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="{% static 'boot/js/bootstrap.min.js' %}"></script>
+</body>
+</html>

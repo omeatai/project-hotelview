@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="row">
+        <div class="col">
+                <!-- ======= Hero Section ======= -->
+                <section id="hero" class="d-flex flex-column justify-content-center align-items-center text-bg-light">
+                    <div class="container text-center text-md-left" data-aos="fade-up">
+                        <div style="padding: 50px;">
+                            <h1 class="text-danger fw-bolder">{{title|title}}</h1>
+                            <h2 class="text-success fw-light">{{content_text}}</h2>
+                            <form class="d-flex mt-4" role="search" method="POST" action="{% url 'home' %}">
+                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-success" type="submit">Search</button>
+                            </form>
+                        </div>
+                    </div>
+                </section><!-- End Hero -->
+        </div>
+    </div>
+{% endblock %}

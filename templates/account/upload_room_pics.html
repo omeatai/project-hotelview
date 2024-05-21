@@ -1,0 +1,54 @@
+{% extends "base_account.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h1>Upload Room Pics</h1>
+
+    <form action="" method="POST" class="form-group my-3 col-6" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert
+            {% if message.tags == 'error' %} alert-danger
+            {% elif message.tags == 'success' %} alert-success
+            {% else %} alert-warning
+            {% endif %} alert-dismissible fade show"
+        role="alert">
+            {{ message }}
+            <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+            ></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        {% if form.errors %}
+            {% for field in form %}
+            {% for error in field.errors %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ error|escape }}
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                ></button>
+            </div>
+            {% endfor %}
+            {% endfor %}
+        {% endif %}
+
+        {{ form|crispy }}
+
+        <label for="sample_files">Upload Sample Pics
+            <input type="file" multiple name="sample_files" id="sample_files" class="form-control my-3" required>
+        </label>
+
+        <div>
+            <button type="submit" class="btn btn-primary">Upload Room Pics</button>
+        </div>
+
+    </form>
+{% endblock %}

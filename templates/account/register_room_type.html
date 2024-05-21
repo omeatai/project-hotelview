@@ -1,0 +1,75 @@
+{% extends "base_account.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h1>Register Room Type</h1>
+
+    <div class="row">
+        <form action="" method="POST" class="form-group my-3 col-6" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert
+                {% if message.tags == 'error' %} alert-danger
+                {% elif message.tags == 'success' %} alert-success
+                {% else %} alert-warning
+                {% endif %} alert-dismissible fade show"
+            role="alert">
+                {{ message }}
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                ></button>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            {% if form.errors %}
+                {% for field in form %}
+                {% for error in field.errors %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ error|escape }}
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close"
+                    ></button>
+                </div>
+                {% endfor %}
+                {% endfor %}
+            {% endif %}
+
+            {{ form|crispy }}
+
+            <div>
+                <button type="submit" class="btn btn-primary">Register Room Type</button>
+            </div>
+
+        </form>
+        <div class="my-3 col-6">
+            <table class="table table-light table-striped">
+                <thead>
+                    <tr class="table-dark">
+                        <th>No.</th>
+                        <th>Room Types</th>
+                        <th>Controls</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for room_type in room_types %}
+                    <tr>
+                        <td>{{ room_type.id }}</td>
+                        <td>{{ room_type.name}}</td>
+                        <td>
+                            <a href="{% url 'edit-room-type' room_type.id %}" class="btn btn-warning">Edit</a>
+                            <a href="{% url 'delete-room-type' room_type.id %}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
